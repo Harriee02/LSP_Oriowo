@@ -11,19 +11,19 @@ public class AverageContextTest {
 	public void testCompute() {
 		AverageContext avg = new AverageContext();
 		List<Integer> list1 = new ArrayList<Integer>();
+		list1.add(1);
 		list1.add(2);
+		list1.add(3);
 		list1.add(4);
-		list1.add(6);
-		list1.add(8);
 		avg.setAverageStrategy(new DefaultAverageStrategy());
 		try {
-			assertEquals(5, avg.compute(list1));
+			assertEquals(2, avg.compute(list1));
 		} catch (EmptyListException e) {
 			e.printStackTrace();
 		}
 		avg.setAverageStrategy(new DropTwoStrategy());
 		try {
-			assertEquals(7, avg.compute(list1));
+			assertEquals(3, avg.compute(list1));
 		} catch (EmptyListException e) {
 			e.printStackTrace();
 		}
@@ -52,17 +52,17 @@ public class AverageContextTest {
 	public void testCompute_Throws_EmptyListException_2() {
 		AverageContext avg = new AverageContext();
 		List<Integer> list1 = new ArrayList<Integer>();
-		list1.add(2);
-		list1.add(4);
+		list1.add(8);
+		list1.add(10);
 		avg.setAverageStrategy(new DefaultAverageStrategy());
 		try {
-			assertEquals(3, avg.compute(list1));
+			assertEquals(9, avg.compute(list1));
 		} catch (EmptyListException e) {
 			e.printStackTrace();
 		}
 		avg.setAverageStrategy(new DropTwoStrategy());
 		try {
-			assertEquals(3, avg.compute(list1));
+			assertEquals(9, avg.compute(list1));
 		} catch (EmptyListException e) {
 			e.printStackTrace();
 		}
@@ -73,21 +73,19 @@ public class AverageContextTest {
 	public void testCompute_RoundedDown() {
 		AverageContext avg = new AverageContext();
 		List<Integer> list1 = new ArrayList<Integer>();
-		list1.add(1);
 		list1.add(2);
-		list1.add(3);
 		list1.add(4);
 		list1.add(5);
 		list1.add(6);
 		avg.setAverageStrategy(new DefaultAverageStrategy());
 		try {
-			assertEquals(3, avg.compute(list1));
+			assertEquals(4, avg.compute(list1));
 		} catch (EmptyListException e) {
 			e.printStackTrace();
 		}
 		avg.setAverageStrategy(new DropTwoStrategy());
 		try {
-			assertEquals(4, avg.compute(list1));
+			assertEquals(5, avg.compute(list1));
 		} catch (EmptyListException e) {
 			e.printStackTrace();
 		}
